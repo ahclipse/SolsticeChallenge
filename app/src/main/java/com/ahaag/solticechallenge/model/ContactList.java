@@ -2,6 +2,7 @@ package com.ahaag.solticechallenge.model;
 
 
 import android.content.Context;
+import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,9 +15,8 @@ public class ContactList {
     public static ContactList get(Context context) {
         if (sContactList == null) {
             sContactList = new ContactList(context);
-            }
-            return sContactList;
         }
+        return sContactList;
     }
 
     private ContactList(Context context) {
@@ -30,5 +30,19 @@ public class ContactList {
             contact.setmSmallImageURL("www.purple.com");
             mContacts.add(contact);
         }
+    }
+
+    public List<Contact> getContacts() {
+        return mContacts;
+    }
+
+    @Nullable
+    public Contact getContact(Phone phone) {
+        for (Contact contact: mContacts) {
+            if (contact.getmPhone().equals(phone)) {
+                return contact;
+            }
+        }
+        return null;
     }
 }
