@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/contact_detail_toolbar_height">
+
+    <TextView
+        android:id="@+id/contact_detail_back_button"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:drawableStart="@drawable/ic_chevron_left"
+        android:textSize="@dimen/contact_detail_back_text_size"
+        android:text="@string/details_all_contacts"/>
+
+    <ImageView
+        android:id="@+id/contact_favorite"
+        android:layout_width="@dimen/contact_detail_toolbar_icon_width"
+        android:layout_height="match_parent"
+        android:layout_toStartOf="@+id/contact_edit"
+        android:layout_marginEnd="@dimen/contact_detail_padding_favorite"
+        android:src="@drawable/favorite_not_selected"/>
+
+    <ImageView
+        android:id="@+id/contact_edit"
+        android:layout_width="@dimen/contact_detail_toolbar_icon_width"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/edit_text"/>
+
+</RelativeLayout>

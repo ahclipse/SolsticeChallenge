@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="contact_detail_margin">10dp</dimen>
+    <dimen name="contact_detail_vertical_margin">28dp</dimen>
+    <dimen name="contact_detail_toolbar_height">48dp</dimen>
+    <dimen name="contact_detail_toolbar_icon_width">34dp</dimen>
+    <dimen name="contact_detail_padding_favorite">12dp</dimen>
+    <dimen name="contact_detail_personal_info_height">160dp</dimen>
+    <dimen name="contact_detail_label_height">12dp</dimen>
+
+    <dimen name="contact_detail_back_text_size">16sp</dimen>
+    <dimen name="contact_detail_label_text_size">14sp</dimen>
+</resources>
