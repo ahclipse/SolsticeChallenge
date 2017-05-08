@@ -19,6 +19,7 @@
         android:layout_height="match_parent"
         android:layout_toStartOf="@+id/contact_edit"
         android:layout_marginEnd="@dimen/contact_detail_padding_favorite"
+        android:contentDescription="@string/image_description"
         android:src="@drawable/favorite_not_selected"/>
 
     <ImageView
@@ -26,6 +27,7 @@
         android:layout_width="@dimen/contact_detail_toolbar_icon_width"
         android:layout_height="match_parent"
         android:layout_alignParentEnd="true"
+        android:contentDescription="@string/image_description"
         android:src="@drawable/edit_text"/>
 
 </RelativeLayout>

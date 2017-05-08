@@ -7,7 +7,15 @@
     <dimen name="contact_detail_padding_favorite">12dp</dimen>
     <dimen name="contact_detail_personal_info_height">160dp</dimen>
     <dimen name="contact_detail_label_height">12dp</dimen>
+    <dimen name="contact_list_card_height">120dp</dimen>
+    <dimen name="contact_list_card_margin_left_right">16dp</dimen>
+    <dimen name="contact_list_card_margin_top_bottom">4dp</dimen>
+    <dimen name="contact_list_card_rounded_corner">6dp</dimen>
+    <dimen name="contact_list_card_text_margin">5dp</dimen>
+    <dimen name="contact_list_card_picture_margin">5dp</dimen>
+    <dimen name="contact_list_card_name_margin_top">16dp</dimen>
 
     <dimen name="contact_detail_back_text_size">16sp</dimen>
     <dimen name="contact_detail_label_text_size">14sp</dimen>
+    <dimen name="contact_list_name_size">20sp</dimen>
 </resources>

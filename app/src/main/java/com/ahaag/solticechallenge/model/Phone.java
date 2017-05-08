@@ -3,7 +3,7 @@ package com.ahaag.solticechallenge.model;
 /**
  * Model class for data related to user's phone number
  */
-class Phone {
+public class Phone {
 
     private String mWork;
     private String mHome;
