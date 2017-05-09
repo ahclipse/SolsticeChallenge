@@ -1,7 +1,6 @@
 package com.ahaag.solsticechallenge.fragment;
 
 
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,18 +10,24 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ahaag.solsticechallenge.R;
 import com.ahaag.solsticechallenge.model.Contact;
 import com.ahaag.solsticechallenge.model.ContactList;
+import com.ahaag.solsticechallenge.network.NetworkFetcher;
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.NetworkImageView;
 
-
+/**
+ * Fragment used to display user contacts in a recycler view. User list downloaded from endpoint
+ * and
+ */
 public class ContactListFragment extends Fragment {
 
+    private static final String TAG = "ContactListFragment";
+
     private RecyclerView mContactRecyclerView;
-    private ContactAdapter mAdapter;
     private Contact[] mContacts;
 
     @Override
@@ -54,25 +59,20 @@ public class ContactListFragment extends Fragment {
 
         private TextView mNameText;
         private TextView mWorkPhoneText;
-        private Contact mContact;
-        private ImageView mImageView;
+        private NetworkImageView mImageView;
 
         public ContactHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.list_item_contact, parent, false));
             itemView.setOnClickListener(this);
             mNameText = (TextView) itemView.findViewById(R.id.contact_list_name);
             mWorkPhoneText = (TextView) itemView.findViewById(R.id.contact_list_phone);
-            mImageView = (ImageView) itemView.findViewById(R.id.contact_list_image);
+            mImageView = (NetworkImageView) itemView.findViewById(R.id.contact_list_image);
         }
 
-        public void bind(Contact contact) {
-            mContact = contact;
-            mNameText.setText(mContact.getName() == null ? "" : mContact.getName());
-            mWorkPhoneText.setText(mContact.getPhone().getWork() == null ? "" : mContact.getPhone().getWork());
-        }
-
-        public void bindDrawable(Drawable drawable) {
-            mImageView.setImageDrawable(drawable);
+        public void bind(Contact contact, String url, ImageLoader imageLoader) {
+            mNameText.setText(contact.getName() == null ? "" : contact.getName());
+            mWorkPhoneText.setText(contact.getPhone().getWork() == null ? "" : contact.getPhone().getWork());
+            mImageView.setImageUrl(url, imageLoader);
         }
 
         @Override
@@ -83,6 +83,8 @@ public class ContactListFragment extends Fragment {
 
     private class ContactAdapter extends RecyclerView.Adapter<ContactHolder> {
 
+        private ImageLoader imageLoader;
+
         public ContactAdapter(Contact[] contacts) {
             mContacts = contacts;
         }
@@ -90,16 +92,18 @@ public class ContactListFragment extends Fragment {
         @Override
         public ContactHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
-
             return new ContactHolder(layoutInflater, parent);
         }
 
         @Override
         public void onBindViewHolder(ContactHolder holder, int position) {
-            if (mContacts != null) {
-                holder.bind(mContacts[position]);
-                //Set placeholder image
-                holder.bindDrawable(getResources().getDrawable(R.drawable.photo_placeholder, null));
+            if (mContacts != null && mContacts[position] != null) {
+                imageLoader = NetworkFetcher.getInstance(getActivity()).getImageLoader();
+                imageLoader.get(mContacts[position].getSmallImageURL(),
+                        ImageLoader.getImageListener(holder.mImageView,
+                                R.drawable.photo_placeholder,
+                                android.R.drawable.ic_dialog_alert));
+                holder.bind(mContacts[position], mContacts[position].getSmallImageURL(), imageLoader);
             }
         }
 

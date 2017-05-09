@@ -22,6 +22,12 @@ public class ContactList {
     private static final String TAG = "ContactList";
     private final String END_POINT_URL = "https://s3.amazonaws.com/technical-challenge/Contacts_v2.json";
 
+    /**
+     * Users downloaded from END_POINT_URL and then parsed into POJOs via Jackson
+     *
+     * @param context the application context
+     * @param callback callback to signal completion
+     */
     public void fetchContacts(Context context, final ContactCallback callback) {
         RequestQueue queue = NetworkFetcher.getInstance(context).getRequestQueue();
         // Request a string response from the provided URL.
@@ -44,6 +50,9 @@ public class ContactList {
         queue.add(stringRequest);
     }
 
+    /**
+     * Notify completion of download and parsing
+     */
     public interface ContactCallback {
         void onSuccess(Contact[] result);
     }
