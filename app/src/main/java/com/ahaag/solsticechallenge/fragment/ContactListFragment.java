@@ -1,6 +1,7 @@
 package com.ahaag.solsticechallenge.fragment;
 
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ahaag.solsticechallenge.R;
+import com.ahaag.solsticechallenge.activity.ContactDetailActivity;
 import com.ahaag.solsticechallenge.model.Contact;
 import com.ahaag.solsticechallenge.model.ContactList;
 import com.ahaag.solsticechallenge.network.NetworkFetcher;
@@ -20,8 +22,11 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 
 /**
- * Fragment used to display user contacts in a recycler view. User list downloaded from endpoint
- * and
+ * Display available contacts in RecyclerView
+ *
+ * @author  Adam Haag
+ * @version 1.0
+ * @since   2017-05-7
  */
 public class ContactListFragment extends Fragment {
 
@@ -54,9 +59,13 @@ public class ContactListFragment extends Fragment {
         }
     }
 
+    /**
+     * Recycler ViewHolder implementation; binds user data to view
+     */
     private class ContactHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener {
 
+        private Contact mContact;
         private TextView mNameText;
         private TextView mWorkPhoneText;
         private NetworkImageView mImageView;
@@ -70,17 +79,23 @@ public class ContactListFragment extends Fragment {
         }
 
         public void bind(Contact contact, String url, ImageLoader imageLoader) {
-            mNameText.setText(contact.getName() == null ? "" : contact.getName());
-            mWorkPhoneText.setText(contact.getPhone().getWork() == null ? "" : contact.getPhone().getWork());
+            mContact = contact;
+            mNameText.setText(mContact.getName() == null ? "" : mContact.getName());
+            mWorkPhoneText.setText(contact.getPhone().getWork() == null ? "" : mContact.getPhone().getWork());
             mImageView.setImageUrl(url, imageLoader);
         }
 
         @Override
         public void onClick(View view) {
-            //TODO
+            Intent intent = ContactDetailActivity.newIntent(getActivity(), mContact.getPhone().getWork());
+            startActivity(intent);
         }
     }
 
+    /**
+     * Recycler adapter implementation; contains logic to download contact thumbnail image
+     * via Volley
+     */
     private class ContactAdapter extends RecyclerView.Adapter<ContactHolder> {
 
         private ImageLoader imageLoader;
@@ -117,10 +132,13 @@ public class ContactListFragment extends Fragment {
         }
     }
 
+    /**
+     * Retrieve contact information on child thread
+     */
     private class FetchContactsTask extends AsyncTask<Void, Void, Void> {
         @Override
         protected Void doInBackground(Void... params) {
-            new ContactList().fetchContacts(getActivity(), new ContactList.ContactCallback(){
+            new ContactList(getActivity()).fetchContacts(getActivity(), new ContactList.ContactCallback(){
                 @Override
                 public void onSuccess(Contact[] result){
                     //Contacts have been retrieved, set adapter and UI

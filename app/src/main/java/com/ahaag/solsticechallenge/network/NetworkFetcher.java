@@ -9,6 +9,13 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 
+/**
+ * Volley class to handle network requests
+ *
+ * @author  Adam Haag
+ * @version 1.0
+ * @since   2017-05-8
+ */
 public class NetworkFetcher {
 
     private static NetworkFetcher mInstance;

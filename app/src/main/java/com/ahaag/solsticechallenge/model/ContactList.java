@@ -1,7 +1,7 @@
 package com.ahaag.solsticechallenge.model;
 
-
 import android.content.Context;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.ahaag.solsticechallenge.network.NetworkFetcher;
@@ -15,12 +15,24 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 
 /**
- * Simple class representing a list of contacts retrieved from specified endpoint
+ * Singleton class representing a list of contacts
+ *
+ * @author  Adam Haag
+ * @version 1.0
+ * @since   2017-05-7
  */
 public class ContactList {
 
     private static final String TAG = "ContactList";
     private final String END_POINT_URL = "https://s3.amazonaws.com/technical-challenge/Contacts_v2.json";
+    private static Contact[] mContacts;
+
+    /**
+     * Default constructor
+     *
+     * @param context
+     */
+    public ContactList(Context context) {}
 
     /**
      * Users downloaded from END_POINT_URL and then parsed into POJOs via Jackson
@@ -36,7 +48,8 @@ public class ContactList {
                     @Override
                     public void onResponse(String response) {
                         try {
-                            callback.onSuccess(new ObjectMapper().readValue(response, Contact[].class));
+                            mContacts = new ObjectMapper().readValue(response, Contact[].class);
+                            callback.onSuccess(mContacts);
                         } catch (IOException e) {
                             Log.e(TAG, "Couldn't Parse Data", e);
                         }
@@ -55,5 +68,21 @@ public class ContactList {
      */
     public interface ContactCallback {
         void onSuccess(Contact[] result);
+    }
+
+    /**
+     * Find specific contact by unique work phone number
+     *
+     * @param workPhone work phone string
+     * @return contact matching contact
+     */
+    @Nullable
+    public Contact getContact(String workPhone) {
+        for (Contact contact: mContacts) {
+            if (contact.getPhone().getWork().equals(workPhone)) {
+                return contact;
+            }
+        }
+        return null;
     }
 }

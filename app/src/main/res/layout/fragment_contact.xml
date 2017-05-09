@@ -13,11 +13,10 @@
         android:layout_marginTop="@dimen/contact_detail_vertical_margin"
         android:orientation="horizontal">
 
-        <ImageView
+        <com.android.volley.toolbox.NetworkImageView
             android:id="@+id/contact_detail_large_image"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:src="@drawable/favorite_selected"
             android:layout_weight="1"/>
 
         <RelativeLayout
@@ -38,8 +37,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/contact_name_label"
-                android:textStyle="bold"
-                android:text="@string/details_name"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/contact_company_label"
@@ -54,8 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:textStyle="bold"
-                android:text="@string/details_company"/>
+                android:textStyle="bold" />
 
         </RelativeLayout>
 
@@ -78,8 +75,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:textStyle="bold"
-            android:text="252-907-8676"/>
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/work_label"
@@ -99,8 +95,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:textStyle="bold"
-            android:text="252-907-8676"/>
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/home_label"
@@ -120,8 +115,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:textStyle="bold"
-            android:text="252-907-8676"/>
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/mobile_label"
@@ -144,15 +138,13 @@
         android:id="@+id/contact_address_street"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:text="123 Fake St."/>
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/contact_address_city_zip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:text="Chicago, IL 60606"/>
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/contact_birthday_label"
@@ -166,8 +158,7 @@
         android:id="@+id/contact_birthday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:text="April, 25 1990"/>
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/contact_email_label"
@@ -181,7 +172,6 @@
         android:id="@+id/contact_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:text="Myemail@gmail.com"/>
+        android:textStyle="bold" />
 
 </LinearLayout>

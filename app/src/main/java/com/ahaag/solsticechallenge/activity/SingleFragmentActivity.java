@@ -9,6 +9,13 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.ahaag.solsticechallenge.R;
 
+/**
+ * Generic Activity; adds fragment to support manager
+ *
+ * @author  Adam Haag
+ * @version 1.0
+ * @since   2017-05-7
+ */
 public abstract class SingleFragmentActivity  extends AppCompatActivity {
 
     protected abstract Fragment createFragment();

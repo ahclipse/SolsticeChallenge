@@ -1,12 +1,12 @@
 <resources>
     <string name="app_name">SolsticeChallenge</string>
     <string name="details_all_contacts">All Contacts</string>
-    <string name="details_name">Name</string>
-    <string name="details_company">Company</string>
-    <string name="details_phone">Phone</string>
-    <string name="details_address">Address</string>
-    <string name="details_birthday">Birthday</string>
-    <string name="details_email">Email</string>
+    <string name="details_name">Name:</string>
+    <string name="details_company">Company:</string>
+    <string name="details_phone">Phone:</string>
+    <string name="details_address">Address:</string>
+    <string name="details_birthday">Birthday:</string>
+    <string name="details_email">Email:</string>
     <string name="details_home">Home</string>
     <string name="details_work">Work</string>
     <string name="details_mobile">Mobile</string>
