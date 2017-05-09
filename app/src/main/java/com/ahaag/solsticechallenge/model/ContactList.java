@@ -15,12 +15,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 
 /**
- * Singleton class representing a list of contacts retrieved from specified endpoint
+ * Simple class representing a list of contacts retrieved from specified endpoint
  */
 public class ContactList {
 
     private static final String TAG = "ContactList";
-//    private static ContactList sContactList;
     private final String END_POINT_URL = "https://s3.amazonaws.com/technical-challenge/Contacts_v2.json";
 
     public void fetchContacts(Context context, final ContactCallback callback) {
@@ -48,14 +47,4 @@ public class ContactList {
     public interface ContactCallback {
         void onSuccess(Contact[] result);
     }
-
-//    @Nullable
-//    public Contact getContact(Phone phone) {
-//        for (Contact contact: mContacts) {
-//            if (contact.getPhone().equals(phone)) {
-//                return contact;
-//            }
-//        }
-//        return null;
-//    }
 }

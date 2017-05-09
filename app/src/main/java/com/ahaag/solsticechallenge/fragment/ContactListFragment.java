@@ -1,6 +1,7 @@
 package com.ahaag.solsticechallenge.fragment;
 
 
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ahaag.solsticechallenge.R;
@@ -33,22 +35,13 @@ public class ContactListFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         View v = inflater.inflate(R.layout.fragment_contact_list, container, false);
         mContactRecyclerView = (RecyclerView) v.findViewById(R.id.contact_recycler_view);
         mContactRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-//        updateUI();
         setUpAdapter();
 
         return v;
     }
-
-//    private void updateUI() {
-//        ContactList contactList = ContactList.get(getActivity());
-//        Contact[] contacts = contactList.getContacts();
-//        mAdapter = new ContactAdapter(contacts);
-//        mContactRecyclerView.setAdapter(mAdapter);
-//    }
 
     private void setUpAdapter() {
         if (isAdded()) {
@@ -62,18 +55,24 @@ public class ContactListFragment extends Fragment {
         private TextView mNameText;
         private TextView mWorkPhoneText;
         private Contact mContact;
+        private ImageView mImageView;
 
         public ContactHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.list_item_contact, parent, false));
             itemView.setOnClickListener(this);
             mNameText = (TextView) itemView.findViewById(R.id.contact_list_name);
             mWorkPhoneText = (TextView) itemView.findViewById(R.id.contact_list_phone);
+            mImageView = (ImageView) itemView.findViewById(R.id.contact_list_image);
         }
 
         public void bind(Contact contact) {
             mContact = contact;
             mNameText.setText(mContact.getName() == null ? "" : mContact.getName());
             mWorkPhoneText.setText(mContact.getPhone().getWork() == null ? "" : mContact.getPhone().getWork());
+        }
+
+        public void bindDrawable(Drawable drawable) {
+            mImageView.setImageDrawable(drawable);
         }
 
         @Override
@@ -99,6 +98,8 @@ public class ContactListFragment extends Fragment {
         public void onBindViewHolder(ContactHolder holder, int position) {
             if (mContacts != null) {
                 holder.bind(mContacts[position]);
+                //Set placeholder image
+                holder.bindDrawable(getResources().getDrawable(R.drawable.photo_placeholder, null));
             }
         }
 
@@ -113,12 +114,12 @@ public class ContactListFragment extends Fragment {
     }
 
     private class FetchContactsTask extends AsyncTask<Void, Void, Void> {
-
         @Override
         protected Void doInBackground(Void... params) {
             new ContactList().fetchContacts(getActivity(), new ContactList.ContactCallback(){
                 @Override
                 public void onSuccess(Contact[] result){
+                    //Contacts have been retrieved, set adapter and UI
                     mContacts = result;
                     setUpAdapter();
                 }
