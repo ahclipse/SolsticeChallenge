@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SolticeChallenge</string>
+    <string name="app_name">SolsticeChallenge</string>
     <string name="details_all_contacts">All Contacts</string>
     <string name="details_name">Name</string>
     <string name="details_company">Company</string>

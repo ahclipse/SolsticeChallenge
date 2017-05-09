@@ -1,4 +1,4 @@
-package com.ahaag.solticechallenge;
+package com.ahaag.solsticechallenge;
 
 import org.junit.Test;
 

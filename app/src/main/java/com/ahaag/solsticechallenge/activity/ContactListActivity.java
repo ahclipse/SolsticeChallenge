@@ -1,9 +1,9 @@
-package com.ahaag.solticechallenge.activity;
+package com.ahaag.solsticechallenge.activity;
 
 
 import android.support.v4.app.Fragment;
 
-import com.ahaag.solticechallenge.fragment.ContactListFragment;
+import com.ahaag.solsticechallenge.fragment.ContactListFragment;
 
 public class ContactListActivity extends SingleFragmentActivity{
 

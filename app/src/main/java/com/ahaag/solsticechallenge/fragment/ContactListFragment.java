@@ -1,4 +1,4 @@
-package com.ahaag.solticechallenge.fragment;
+package com.ahaag.solsticechallenge.fragment;
 
 
 import android.os.Bundle;
@@ -10,13 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.ahaag.solticechallenge.R;
-import com.ahaag.solticechallenge.model.Contact;
-import com.ahaag.solticechallenge.model.ContactList;
+import com.ahaag.solsticechallenge.R;
+import com.ahaag.solsticechallenge.model.Contact;
+import com.ahaag.solsticechallenge.model.ContactList;
 
-import java.util.List;
 
 public class ContactListFragment extends Fragment {
 
@@ -37,7 +35,7 @@ public class ContactListFragment extends Fragment {
 
     private void updateUI() {
         ContactList contactList = ContactList.get(getActivity());
-        List<Contact> contacts = contactList.getContacts();
+        Contact[] contacts = contactList.getContacts();
         mAdapter = new ContactAdapter(contacts);
         mContactRecyclerView.setAdapter(mAdapter);
     }
@@ -58,21 +56,21 @@ public class ContactListFragment extends Fragment {
 
         public void bind(Contact contact) {
             mContact = contact;
-            mNameText.setText(mContact.getmName());
-            mWorkPhoneText.setText(mContact.getmPhone().getmWork());
+            mNameText.setText(mContact.getName() == null ? "" : mContact.getName());
+            mWorkPhoneText.setText(mContact.getPhone().getWork() == null ? "" : mContact.getPhone().getWork());
         }
 
         @Override
         public void onClick(View view) {
-            Toast.makeText(getActivity(), "Hazah!", Toast.LENGTH_SHORT).show();
+            //TODO
         }
     }
 
     private class ContactAdapter extends RecyclerView.Adapter<ContactHolder> {
 
-        private List<Contact> mContacts;
+        private Contact[] mContacts;
 
-        public ContactAdapter(List<Contact> contacts) {
+        public ContactAdapter(Contact[] contacts) {
             mContacts = contacts;
         }
 
@@ -85,12 +83,18 @@ public class ContactListFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(ContactHolder holder, int position) {
-            holder.bind(mContacts.get(position));
+            if (mContacts != null) {
+                holder.bind(mContacts[position]);
+            }
         }
 
         @Override
         public int getItemCount() {
-            return mContacts.size();
+            if (mContacts != null) {
+                return mContacts.length;
+            } else {
+                return 7;
+            }
         }
     }
 }
