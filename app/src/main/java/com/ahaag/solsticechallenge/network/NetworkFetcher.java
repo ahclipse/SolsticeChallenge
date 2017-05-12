@@ -21,7 +21,7 @@ public class NetworkFetcher {
     private static NetworkFetcher mInstance;
     private RequestQueue mRequestQueue;
     private ImageLoader mImageLoader;
-    private static Context mCtx;
+    private Context mCtx;
 
     private NetworkFetcher(Context context) {
         mCtx = context;

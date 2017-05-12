@@ -24,3 +24,4 @@ Please download linked zip file, unpack, and open via Android Studio. Alternativ
 * Persist contact data outside of singleton in local storage database
 * Allow user to edit contact information & toggle favorite users 
 * Build out Junit test suite 
+* Implement ViewPager to easily switch between contact detail pages

@@ -8,7 +8,7 @@ import com.ahaag.solsticechallenge.fragment.ContactDetailFragment;
 
 /**
  * Creates ContactDetailFragment and passes along work phone number under the
- * assumption this will be used as an unique identifier to determine with contact
+ * assumption this will be used as an unique identifier to determine which contact
  * to show
  *
  * @author  Adam Haag
